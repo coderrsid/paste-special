@@ -7,6 +7,18 @@
     "update": "npm install -g generator-joplin && yo joplin --update",
     "test": "jest --watchAll --testPathPattern=tests"
   },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "coverageReporters": [
+      "text"
+    ]
+  },
   "license": "MIT",
   "keywords": [
     "joplin-plugin"
@@ -17,10 +29,16 @@
     "@types/node": "^14.0.14",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^6.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "jest": "^27.0.6",
     "on-build-webpack": "^0.1.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
     "tar": "^6.0.5",
     "ts-jest": "^27.0.3",
     "ts-loader": "^7.0.5",
@@ -31,6 +49,7 @@
   },
   "dependencies": {
     "ignore-loader": "^0.1.2",
-    "papaparse": "^5.3.1"
+    "papaparse": "^5.3.1",
+    "react": "^17.0.2"
   }
 }

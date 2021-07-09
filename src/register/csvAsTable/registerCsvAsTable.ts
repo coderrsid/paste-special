@@ -23,45 +23,48 @@ export default async function registerCsvAsTable(): Promise<void> {
 		},
 	]);
 	await dialogs.addScript(importCsvDialog, './register/csvAsTable/importCsv.js');
-	
+	const errorMessage = "Please use valid CSV data!"
 
     // Respective command for button
-		await joplin.commands.register({
-            name: 'pasteCsvAsTable',
-            label: 'CSV as Table',
-            execute: async () => {
-				let csv: string = await (joplin as any).clipboard.readText();
-				// if clipboard data, not found
-				if(!csv?.length) return;
-				csv = csv.trim();
-				const pasteCsvAsTable = await csvAsTable(csv);
-				await joplin.commands.execute("insertText", pasteCsvAsTable);
-				await joplin.commands.execute('editor.focus');
-			}
-		});
-		await joplin.commands.register({
-            name: 'importCsvAsTable',
-            label: 'CSV as Table',
-            execute: async () => {
-				let data = await dialogs.open(importCsvDialog);
-				const csv = data.formData.hiddenForm.hiddenInput;
-				const importCsvAsTable = await csvAsTable(csv);
-				await joplin.commands.execute("insertText", importCsvAsTable);
-				await joplin.commands.execute('editor.focus');
-			}
-		}); 
+	await joplin.commands.register({
+		name: 'pasteCsvAsTable',
+		label: 'CSV as Table',
+		execute: async () => {
+			let csv: string = await (joplin as any).clipboard.readText();
+			// if clipboard data, not found
+			if(!csv?.length) return alert(errorMessage);
+			csv = csv.trim();
+			const pasteCsvAsTable = await csvAsTable(csv);
+			await joplin.commands.execute("insertText", pasteCsvAsTable);
+			await joplin.commands.execute('editor.focus');
+		}
+	});
+	await joplin.commands.register({
+		name: 'importCsvAsTable',
+		label: 'CSV as Table',
+		execute: async () => {
+			let data = await dialogs.open(importCsvDialog);
+			let csv = data.formData.hiddenForm.hiddenInput;
+			// if csv couln't be imported
+			if(!csv && csv.length === 0) return alert(errorMessage);
+			csv = csv.trim();
+			const importCsvAsTable = await csvAsTable(csv);
+			await joplin.commands.execute("insertText", importCsvAsTable);
+			await joplin.commands.execute('editor.focus');
+		}
+	}); 
 
-		// For creating menu items under Edit Menubar item and Folder Context menu.
-		await joplin.views.menus.create('pasteSpecial', 'Paste Special', [
-			{
-				label: "CSV as Table",
-				commandName: "pasteCsvAsTable"
-			}
-		], MenuItemLocation.Edit);
-		await joplin.views.menus.create('importSpecial', 'Import Special', [
-			{
-				label: "CSV as Table",
-				commandName: "importCsvAsTable"
-			}
-		], MenuItemLocation.Edit);
+	// For creating menu items under Edit Menubar item and Folder Context menu.
+	await joplin.views.menus.create('pasteSpecial', 'Paste Special', [
+		{
+			label: "CSV as Table",
+			commandName: "pasteCsvAsTable"
+		}
+	], MenuItemLocation.Edit);
+	await joplin.views.menus.create('importSpecial', 'Import Special', [
+		{
+			label: "CSV as Table",
+			commandName: "importCsvAsTable"
+		}
+	], MenuItemLocation.Edit);
 }

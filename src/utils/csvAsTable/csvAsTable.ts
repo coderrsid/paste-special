@@ -6,13 +6,13 @@ const parseCsv = async (csv: string) => {
 		complete: (results) => {
 			if(results?.data) {
 				parsedCsv = results.data;
+				console.info(results);
 			}
 		},
 		error: (err) => {
 			console.info("PapaParse err: ", err[0]?.message);
 		}
 	});
-	
 	return parsedCsv;
 }
 
