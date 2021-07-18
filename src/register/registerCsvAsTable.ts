@@ -33,6 +33,10 @@ export default async function registerCsvAsTable(): Promise<void> {
 			{
 				label: "CSV as Table",
 				commandName: "pasteCsvAsTable"
+			},
+			{
+				label: "HTML as Markdown",
+				commandName: "pasteHtmlAsMarkdown"
 			}
 		], MenuItemLocation.Edit);
 		await joplin.views.menus.create('importSpecial', 'Import Special', [

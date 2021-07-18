@@ -4,7 +4,7 @@ const parseCsv = async (csv: string) => {
 	let parsedCsv: [] = undefined;
 	await parse(csv, {
 		complete: (results) => {
-			if(results?.data) {
+			if (results?.data) {
 				parsedCsv = results.data;
 			}
 		},
@@ -12,13 +12,15 @@ const parseCsv = async (csv: string) => {
 			console.info("PapaParse err: ", err[0]?.message);
 		}
 	});
-	return parsedCsv; 
+
+	console.log(parsedCsv);
+	return parsedCsv;
 }
 
 const csvToMarkdown = (parsedCsv: any[]): string => {
 	// handles pipes and backslashes and nul characters
 	parsedCsv.forEach((rows, i) => {
-		rows.forEach((e,j) => {
+		rows.forEach((e, j) => {
 			parsedCsv[i][j] = e.replace(/[|]|[\\]/g, "\\$&");
 		});
 	});
@@ -26,7 +28,7 @@ const csvToMarkdown = (parsedCsv: any[]): string => {
 	let mdTable: string;
 
 	// for empty/null csv input
-	if(!parsedCsv.length) {
+	if (!parsedCsv.length) {
 		mdTable = `| ${["   "].map(_ => "   ")} | \n| --- | `;
 		return mdTable;
 	}
@@ -37,15 +39,15 @@ const csvToMarkdown = (parsedCsv: any[]): string => {
 	mdTable = `| ${header.join(" | ")} | `;
 	mdTable = mdTable.concat(`\n| ${header.map(_ => "---").join(" | ")} | `);
 
-	if(rows.length) {
+	if (rows.length) {
 		rows.forEach(row => {
-				mdTable = mdTable.concat(`\n| ${row.map(e=> e).join(" | ")} | `);
+			mdTable = mdTable.concat(`\n| ${row.map(e => e).join(" | ")} | `);
 		});
 	}
-  	return mdTable;
+	return mdTable;
 }
 
-export default async function csvAsTable (csv: string) {
+export default async function csvAsTable(csv: string) {
 	let mdTable: string, parsedCsv: [];
 
 	parsedCsv = await parseCsv(csv);
