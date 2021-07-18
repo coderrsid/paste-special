@@ -63,7 +63,7 @@ test('it should expect to convert also empty cells', async () => {
 test('it should expect to convert data properly in table', async () => {
   let testCase = 'Login email;Identifier;One-time password;Recovery code;First name;Last name;Department;Location\nrachel@example.com;9012;12se74;rb9012;Rachel;Booker;Sales;Manchester\nlaura@example.com;2070;04ap67;lg2070;Laura;Grey;Depot;London';
   const result = await csvAsTable(testCase);
-  expect(result).toBe("| Login email | Identifier | One-time password | Recovery code | First name | Last name | Department | Location | \n| --- | --- | --- | --- | --- | --- | --- | --- | \n| rachel@example.com | 9012 | 12se74 | rb9012 | Rachel | Booker | Sales | Manchester | \n| laura@example.com | 2070 | 04ap67 | lg2070 | Laura | Grey | Depot | London | " );
+  expect(result).toBe("| Login email | Identifier | One-time password | Recovery code | First name | Last name | Department | Location | \n| --- | --- | --- | --- | --- | --- | --- | --- | \n| rachel@example.com | 9012 | 12se74 | rb9012 | Rachel | Booker | Sales | Manchester | \n| laura@example.com | 2070 | 04ap67 | lg2070 | Laura | Grey | Depot | London | ");
 });
 
 test('it should return expected output by handling quotes and empty string', async () => {
