@@ -12,21 +12,27 @@ const parseCsv = async (csv: string) => {
 			console.info("PapaParse err: ", err[0]?.message);
 		}
 	});
-	
-	return parsedCsv;
+	return parsedCsv; 
 }
 
 const csvToMarkdown = (parsedCsv: any[]): string => {
-	// remove pipes and backslashes
+	// handles pipes and backslashes and nul characters
 	parsedCsv.forEach((rows, i) => {
 		rows.forEach((e,j) => {
-			parsedCsv[i][j] = e.replace(/[|\\]/g,'');
+			parsedCsv[i][j] = e.replace(/[|]|[\\]/g, "\\$&");
 		});
-	})
+	});
+
+	let mdTable: string;
+
+	// for empty/null csv input
+	if(!parsedCsv.length) {
+		mdTable = `| ${["   "].map(_ => "   ")} | \n| --- | `;
+		return mdTable;
+	}
 
 	const header = parsedCsv[0];
 	const rows = parsedCsv.slice(1);
-	let mdTable: string;
 
 	mdTable = `| ${header.join(" | ")} | `;
 	mdTable = mdTable.concat(`\n| ${header.map(_ => "---").join(" | ")} | `);
