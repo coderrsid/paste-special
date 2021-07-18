@@ -9,7 +9,7 @@ export default async function registerCsvAsTable(): Promise<void> {
         execute: async () => {
             let html: string = await (joplin as any).clipboard.readHtml();
             // if clipboard data, not found
-            if(!html?.length) return;
+            if (!html?.length) return;
             const turndownService = new Turndown();
             turndownService.use(gfm);
             const pasteHtmlAsMarkdown = turndownService.turndown(html.toString());
