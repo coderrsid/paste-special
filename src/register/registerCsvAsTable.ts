@@ -23,7 +23,7 @@ export default async function registerCsvAsTable(): Promise<void> {
 		{
 			label: "CSV as Table",
 			commandName: "pasteCsvAsTable",
-			accelerator: "Ctrl+Shift+V"
+			accelerator: "Cmd+Shift+V"
 		},
 		{
 			label: "HTML as Markdown",
