@@ -1,4 +1,4 @@
-# Paste Special Plugin - Joplin
+# Paste Special Plugin - Joplin  ([NPM](https://www.npmjs.com/package/joplin-plugin-pastespecial))
 
 This plugin is for pasting formatted text and provide sub-menu options inside it to paste from user clipboard. The sub-menu contains options for file formats like Paste Excel or CSV as Markdown table and Pasting HTML as Markdown. This project was built under GSoC'21.
 
