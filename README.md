@@ -12,7 +12,7 @@ This plugin is for pasting formatted text and provide sub-menu options inside it
 
 ## Building the plugin
 
-The plugin is built using Webpack, which creates the compiled code in `/dist`. A JPL archive will also be created at the root, which can use to distribute the plugin.
+The plugin is built using Webpack, which creates the compiled code in `/dist`. A JPL archive will also be created at the root, which can be used to distribute the plugin.
 
 To build the plugin, simply run `npm run dist`.
 
@@ -32,11 +32,7 @@ In general this command tries to do the right thing - in particular it's going t
 
 The file that may cause problem is "webpack.config.js" because it's going to be overwritten. For that reason, if you want to change it, consider creating a separate JavaScript file and include it in webpack.config.js. That way, when you update, you only have to restore the line that include your file.
 
-## Mentors
-
-- Helmut K. C. Tessarek (@tessus)
-- Stefan (@PackElend)
-
 ## Development Dependencies
 
 - [Papa Parse](https://www.papaparse.com/)
+- [Showdown js](https://github.com/showdownjs/showdown)
